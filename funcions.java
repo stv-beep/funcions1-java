@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class funcions {
 public static Scanner sc = new Scanner(System.in);
 public static String opcio;
-public final int mida = 10;
+public static final int mida = 10;
 public static String[] cognoms = {"Algueró","Ferre","Bayo","Falco","Fernandez","Didouh","Garcia","El Khattabi","Aloy","Brull"};//Elements:10
 public static boolean running = true;
 public static String element, x; //element
