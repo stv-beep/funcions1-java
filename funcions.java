@@ -25,8 +25,10 @@ String opcions[] = new String [12];
 opcions[0] = "\"i\": Inserir (element,posició) --- NO FUNCIONA";
 opcions[1] = "\"l\": Localitzar (element)      --- NO FUNCIONA BÉ";
 opcions[2] = "\"r\": Recuperar (posició)       --- OPERATIU";
+opcions[5] = "\"a\": Anul·lar                  --- OPERATIU";
 opcions[6] = "\"p\": PrimerDarrer (llista)     --- NO FUNCIONA BÉ";
-opcions[7] = "\"m\": Imprimir                  --- NO OPERATIU";
+opcions[7] = "\"m\": Imprimir                  --- OPERATIU";
+opcions[11] = "\"x\": Sortir                    --- OPERATIU";
 for (String z : opcions) {
   if (z!=null) {
   System.out.println(z);}
@@ -51,6 +53,7 @@ public static int entradaPos() { //funció que retornarà posició entrada pel u
 }
 
 /*Demanar llista*/
+//en certs problemes, i segurament la eliminaré ja que no és necessaria xq només tenim una llista.
 public static void entradaLlista() {
   System.out.println("Introdueix una llista: ");
   while(true) {
@@ -64,6 +67,16 @@ public static void entradaLlista() {
   return;
 }
 
+
+/*Funció ANULAR*/
+public static void funcNull() {
+
+  for (int e = 0; e<num_elements; e++) {
+      cognoms[e] = null;
+  }
+  System.out.println("La llista (cognoms) ha estat buidada.");
+  return;
+}
 
 
 /*Funció PrimerDarrer*/
@@ -108,7 +121,7 @@ Menu();
 opcio = sc.next();
 
 /*COMPTADOR. S'ha de canviar de puesto i posar-lo a cada operació, o fer una funció en ell*/
-num_elements = 0;//per a que comenci a comptar des del principi i per a que no es sumin elements de més cada vegada que es completi el bucle for.
+num_elements = 0;
 for (String e : cognoms) {
     if(e!=null) {
         num_elements++;
@@ -151,12 +164,20 @@ while (true) {
 }
 if (cognoms[p] == null) {
     System.out.println("La posició " +p+" es buida" );
+    System.out.println();
 }else{
     System.out.println("A la posició " +p+" es troba l'element: "+cognoms[p]+".");
+    System.out.println();
 
 }
 break;
 
+case "a": //ANULAR
+funcNull();
+
+
+
+break;
 
 case "p": //primerDarrer
 System.out.println("PrimerDarrer");
@@ -167,11 +188,18 @@ break;
 
 case "m"://Imprimir
 funcioImpr();
+
+System.out.println(cognoms.length);//llargada de la llista per a fer proves
 break;
+
 
 case "x":
 System.out.println("Vinga dw");
+System.out.println("____________________________________");
 running = false;
+break;
+
+default:
 break;
 }
 
