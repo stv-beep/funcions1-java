@@ -1,40 +1,25 @@
 import java.util.Scanner;
 public class funcions {
-public static Scanner sc = new Scanner(System.in);
-public static String opcio;
-public final int mida = 10;
-public static String[] cognoms = {"Algueró","Ferre","Bayo","Falco","Fernandez","Didouh","Garcia","El Khattabi","Aloy","Brull"};//Elements:10
-public static boolean running = true;
-public static String element, x; //element
-public static int pos, p; //posició
-public static int num_elements; //comptador d'elements
-public static String nomllista, llista; //nom de la llista
-public static String primerDarrer;
-
 
 /*****FUNCIONS****/
 
 
-/*Pel que fa al codi, en concret hem de tenir una funció per presentar el menú:
+/**Pel que fa al codi, en concret hem de tenir una funció per presentar el menú:
 char menu(String[ ] opcions)*/
-//el menú se te que arreglar
-public static void Menu(){
+/*Mostra opcions per pantalla, recull quina opció escull l'usuari q haurà
+de ser de tipus char, torna aquest char*/
+public static char Menu(String[] opcions, String opcio){
 System.out.println("Opcions del programa: ");
 System.out.println("____________________________________");
-String opcions[] = new String [12];
-opcions[0] = "\"i\": Inserir (element,posició) --- NO FUNCIONA";
-opcions[1] = "\"l\": Localitzar (element)      --- NO FUNCIONA BÉ";
-opcions[2] = "\"r\": Recuperar (posició)       --- OPERATIU";
-opcions[5] = "\"a\": Anul·lar                  --- OPERATIU";
-opcions[6] = "\"p\": PrimerDarrer (llista)     --- NO FUNCIONA BÉ";
-opcions[7] = "\"m\": Imprimir                  --- OPERATIU";
-opcions[11] = "\"x\": Sortir                    --- OPERATIU";
+/*Imprimim opcions*/
 for (String z : opcions) {
-  if (z!=null) {
-  System.out.println(z);}
+  System.out.println(z);
 }
-
-return;}
+/*Demanar una opció*/
+Scanner sc = new Scanner(System.in);
+opcio = sc.next();
+char opc = opcio.charAt(0);
+return opc;}
 
 /*Demanar element*/
 public static String entradaElement() {
@@ -44,12 +29,15 @@ public static String entradaElement() {
 }
 
 
-/*Demanar posició*/
+/**Demanar posició*/
+/*ENTRADA: la posició escrita per l'usuari ja declarada dalt.
+SORTIDA: la posició de tipus enter.
+FUNCIONAMENT: guarda la posició escrita per l'usuari a la variable "pos"
+ i retorna aquest int quan es crida la funció.*/
 public static int entradaPos() { //funció que retornarà posició entrada pel user
   System.out.println("Introdueix una posició: ");
   pos = sc.nextInt();
   return pos; //retorna la posició
-
 }
 
 /*Demanar llista*/
@@ -66,6 +54,18 @@ public static void entradaLlista() {
   }
   return;
 }
+
+/*Suprimir*/
+  public static int entradaSuprimir() { //funció que retornarà posició entrada pel user
+ System.out.println("Introdueix una posició: ");
+ pos = sc.nextInt();
+ return pos; //retorna la posició
+}
+
+/*SuprimirData*/
+//public static String nomSuprimir()
+
+/*l'estic fent a l'eclipse*/
 
 
 /*Funció ANULAR*/
@@ -94,13 +94,16 @@ public static void funcioPD() {
 }
 
 /*Funció imprimir llista*/
+/*Entrada: String[] a imprimir i int num (num_elements)
+* Sortida: Resultat per pantalla (Void)
+* Funció: Mostra per pantalla els elements de l'array*/
 public static void funcioImpr() {
 if (num_elements > 0) {
   int num = 0;
 for (String j : cognoms) {
 
   num++;
-  System.out.println("L'element "+num+" és "+j+".");
+  System.out.println("L'element "+(num-1)+" és "+j+".");
 }
 } else {
   System.out.println("Llista buida!");
@@ -115,10 +118,39 @@ return;
 
 /*MAIN*/
 public static void main(String[] args){
+/**Variables*/
+/*array de les opcions del menú, que s'imprimiran per pantalla*/
+String[] opcions = {"\"i\": Inserir (element,posició) --- NO FUNCIONA",
+"\"l\": Localitzar (element)      --- NO FUNCIONA BÉ",
+"\"r\": Recuperar (posició)       --- OPERATIU",
+"\"s\": Suprimir (posició)        --- OPERATIU*",
+"\"d\": SuprimirDada (element)    --- NO OPERATIU",
+"\"a\": Anul·lar                  --- OPERATIU",
+"\"p\": PrimerDarrer              --- NO FUNCIONA BÉ",
+"\"m\": Imprimir                  --- OPERATIU",
+"\"o\": Ordenar                   --- NO OPERATIU",
+"\"x\": Sortir                    --- OPERATIU"};
+char opc;
+String opcio;
+int mida = 10;
+String[] cognoms = {"Algueró","Ferre","Bayo","Falco","Fernandez","Didouh","Garcia","El Khattabi","Aloy","Brull"};//Elements:10
+boolean running = true;
+String element, x; //element
+int pos, p; //posició
+int num_elements = 0; //comptador d'elements
+String nomllista, llista; //nom de la llista
+String primerDarrer;
+Scanner sc = new Scanner(System.in);
+
+
+
+
   while (running) {
 
-Menu();
-opcio = sc.next();
+Menu(opcions);
+
+
+
 
 /*COMPTADOR. S'ha de canviar de puesto i posar-lo a cada operació, o fer una funció en ell*/
 num_elements = 0;
@@ -128,12 +160,12 @@ for (String e : cognoms) {
     }
 }
 
-switch(opcio) {
-case "i":
+switch(opc) {
+case 'i':
 System.out.println("Inserir: ");
 break;
 
-case "l"://Localitzar
+case 'l'://Localitzar
 System.out.println("Localitzar");
 do {
 x = entradaElement();
@@ -150,8 +182,7 @@ for(int i = 0; i<cognoms.length; i++) {
 break;
 
 
-
-case "r": //Recuperar
+case 'r': //Recuperar
 System.out.println("Recuperar");
 while (true) {
   p = entradaPos();//guardem a la variable "p" el que ens retorna la funció
@@ -171,29 +202,53 @@ if (cognoms[p] == null) {
 
 }
 break;
+case 's': //Suprimir
+                    p = entradaSuprimir();
 
-case "a": //ANULAR
+
+                   if (p <= 10 && p >= 0) {
+                       System.out.println("Quina llista?" );
+                       String taula = sc.next();
+
+                       if (taula.equals("cognoms")) {
+                           cognoms[p] = "";
+                           System.out.println("Dada borrada, ara la posicio " + p + " esta lliure" );
+
+                       } else {
+                           System.out.println("Aquesta taula no existeix" );
+
+                       }
+
+                   } else {
+                       System.out.println("Aquesta posicio no es valida");
+
+                   }
+                   funcioImpr();
+
+                     break;
+
+case 'a': //ANULAR
 funcNull();
 
 
 
 break;
 
-case "p": //primerDarrer
+case 'p': //primerDarrer
 System.out.println("PrimerDarrer");
   entradaLlista();
   funcioPD(); //crido a la funció
 break;
 
 
-case "m"://Imprimir
+case 'm'://Imprimir
 funcioImpr();
 
 System.out.println(cognoms.length);//llargada de la llista per a fer proves
 break;
 
 
-case "x":
+case 'x':
 System.out.println("Vinga dw");
 System.out.println("____________________________________");
 running = false;
