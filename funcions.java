@@ -4,13 +4,18 @@ public class funcions {
 /*****FUNCIONS****/
 /**Pel que fa al codi, en concret hem de tenir una funció per presentar el menú:
 char menu(String[ ] opcions)*/
-/*Mostra opcions per pantalla, recull quina opció escull l'usuari q haurà
-de ser de tipus char, torna aquest char*/
-public static char Menu(String[] opcions){
+
+/*
+*Entrada: la llista de les opcions
+*Sortida: un char, escrit per l'usuari
+*Funció: Mostra opcions per pantalla, recull quina opció escull l'usuari q haurà
+de ser de tipus char, torna aquest char
+*/
+public static char Menu(String[] opcions1){
   System.out.println("Opcions del programa: ");
   System.out.println("____________________________________");
   /*Imprimim opcions*/
-  for (String z : opcions) {
+  for (String z : opcions1) {
     System.out.println(z); }
 
   /*Demanar una opció*/
@@ -58,13 +63,7 @@ public static void funcLoc(String elem, String[] cognoms) {
   if(u!=null) {
       num_elem++;
   }}
-  String nomllista1;
   Scanner sc = new Scanner(System.in);
-  do {
-  System.out.println("Escriu una llista:");
-  System.out.println("Llista disponible: \"cognoms\".");
-  nomllista1 = sc.next();
-  } while (!(nomllista1.contains("cognoms")));
   /*Preguntem l'element*/
   do {
       System.out.println("Introdueix un element: (Sense Comilles)");
@@ -73,7 +72,7 @@ public static void funcLoc(String elem, String[] cognoms) {
   for(int i = 0; i<num_elem; i++) {
 
       if (i == num_elem) {
-          System.out.println("L'element "+elem+" no es troba a la llista "+nomllista1+".");
+          System.out.println("L'element "+elem+" no es troba a la llista cognoms"+".");
           break;
       }
       if ( cognoms[i] != null && cognoms[i].equals(elem)) {System.out.println("L'element "+elem+" es troba a la posició "+i+"."); break;}
@@ -94,13 +93,7 @@ public static void funcLoc(String elem, String[] cognoms) {
 * Funció: trobar quin element està a la posició p
 */
 public static void funcRecu(int p, String[] cognoms) {
-  String nomllista1;
   Scanner sc = new Scanner(System.in);
-  do {
-  System.out.println("Escriu una llista:");
-  System.out.println("Llista disponible: \"cognoms\".");
-  nomllista1 = sc.next();
-} while (!(nomllista1.contains("cognoms")));//mentres nomllista1 no contingui "cognoms" el do s'executarà
   System.out.println("Escriu una posició:");
   while (true) {
     p = sc.nextInt();
@@ -118,20 +111,51 @@ if (cognoms[p] == null) {
 }
 return;
 }
+//Funció de Suprimir
+//Entrada: Escriure la posició de l'element que volem Suprimir
+//Sortida: Imprimir la llista en la ultima posició lliure
+public static String entradaSuprimir(String[] cognoms, int p1) {
+
+       Scanner sc = new Scanner(System.in);
+       String sortida="";
+       System.out.println("Quina posicio vols eliminar?");
+
+       p1 = sc.nextInt();
+       if (p1 < 10 && p1 >= 0) {
+for (int y=0 ; y<cognoms.length -1; y++) {
+   cognoms[y] = cognoms[y +1];
+}
+
+           System.out.println("Dada borrada, ara la posicio " + p1 + " esta lliure");
+
+       } else {
+           System.out.println("Aquesta posicio no es valida");
+
+
+
+
+       }
+       cognoms[cognoms.length-1] = "";
+       for (int i = 0; i < cognoms.length; i++) {
+           System.out.println(cognoms[i]);
+           sortida = cognoms[i];
+
+       }
+       return sortida;
+   }
+
+
 
 
 
 /*Funció PrimerDarrer*/
 /*
 * Entrada: String[] dels cognoms
-* Sortida: Imprimir l'element per pantalla  (Void)
+* Sortida: l'element en la posició triada i imprimit per pantalla
 * Funció: mostrarà quin és el primer o últim element de la llista
 */
-public static void funcPD(String[] cognoms) {
-  /*Nom de la llista*/
+public static String funcPD(String[] cognoms) {
   Scanner sc = new Scanner(System.in);
-  String nomllista1 = "";
-  entradaLlista(nomllista1);
   /*Comptador*/
   int nE = 0;
   if (llistaBuida(cognoms,nE)==false) {
@@ -140,7 +164,7 @@ public static void funcPD(String[] cognoms) {
            nE++;
        }}}
   /*Primer o darrer*/
-  String pd = sc.next();
+  String pd;
   String primerDarrer = "";
   do {
       System.out.println("Opcions: \"primer\" o \"darrer\"");
@@ -148,41 +172,33 @@ public static void funcPD(String[] cognoms) {
   } while(!(pd.equals("primer")||pd.equals("darrer")));
   if (pd.equals("primer")) {
       System.out.println(cognoms[0]);
-      //primerDarrer = cognoms[0];
+      primerDarrer = cognoms[0];
   } else if (pd.equals("darrer")) {
       System.out.println(cognoms[nE-1]);
-      //primerDarrer = cognoms[nE-1];
+      primerDarrer = cognoms[nE-1];
   }
 
-
-
-
-  return;
+  return primerDarrer;
 }
 
 
 
 
 /*Funció d'imprimir llista*/
-/*Entrada: String[] a imprimir
-* Sortida: Resultat per pantalla (Void)
-* Funció: Mostra per pantalla els elements de l'array*/
-public static void funcImpr(String[] cognoms) {
+/*
+* Entrada: String[] a imprimir, amb un int que indicara l'índex
+* Sortida: Resultat per pantalla (Void), els elements amb les seves posicions
+* Funció: llegeix tota la llista i mostra tots els elements amb la seva posició
+*/
+public static void funcImpr(String[] cognoms3, int p3) {
 
-//falta l'entrada de l'usuari
+  for (p3 =0;p3<cognoms3.length;p3++) {
 
-  int num_elements = 0;
-
-  if (llistaBuida(cognoms,num_elements)==false) {
-       for (String j : cognoms) {
-       if(j!=null) {
-           num_elements++;
-       }
-	  System.out.println("L'element "+(num_elements-1)+" és "+j+".");
+	  System.out.println("L'element "+p3+" és "+cognoms3[p3]+".");
       }
-	 } else {
-    System.out.println("Llista buida!");
-	        }
+/*No poso cap condició ja que tenim una funció per a comprovar
+si la llista està buida o no*/
+
 	return;
 }
 
@@ -243,10 +259,10 @@ public static void funcNull(String[] cognoms) {
   public static void main(String[] args){
   /**Variables*/
   /*array de les opcions del menú, que s'imprimiran per pantalla*/
-  String[] opcions = {"\"i\": Inserir (element,posició)   --- NO OPERATIU",
+  String[] opcions = {"\"i\": Inserir (element,posició,llista) --- NO OPERATIU",
   "\"l\": Localitzar (element, llista)--- NO FUNCIONA BÉ",
   "\"r\": Recuperar (posició, llista) --- OPERATIU",
-  "\"s\": Suprimir (posició)          --- NO OPERATIU",
+  "\"s\": Suprimir (posició)          --- OPERATIU",
   "\"d\": SuprimirDada (element)      --- NO OPERATIU",
   "\"a\": Anul·lar                    --- OPERATIU",
   "\"p\": PrimerDarrer                --- NO OPERATIU",
@@ -263,7 +279,7 @@ public static void funcNull(String[] cognoms) {
   String nomllista;
   String llista =""; //nom de la llista
   //String primerDarrer;
-  boolean comprovacioList;// on guardarem el boolea que ens retornarà la funcio entradaLlista
+  boolean comprovacioList;// on guardarem el boolea que ens retornarà la funcio llistaBuida
   boolean buit0; // si la llista està buida o no
   Scanner sc = new Scanner(System.in);
 
@@ -286,10 +302,12 @@ do{
 
     break;
 
+    case 's' ://suprimir
+
+          entradaSuprimir(cognoms, pos);
+          break;
+
     case 'a': //anul·lar
-    do {
-      comprovacioList = entradaLlista(llista);
-    } while (comprovacioList != true);
 
     llistaBuida(cognoms, numEle);
       if ((llistaBuida(cognoms, numEle)==false)) {
@@ -300,18 +318,18 @@ do{
     break;
 
     case 'p': //primerDarrer
-    do {
-    comprovacioList = entradaLlista(llista);
-    } while (comprovacioList == false);
     funcPD(cognoms);
     break;
 
     case 'm': //imprimir
-    do {
-      comprovacioList = entradaLlista(llista);
-    } while (comprovacioList != true);
+    /*comprovem si la llista està buida amb la funció llistaBuida*/
+    if (llistaBuida(cognoms,numEle)==false) {
+      System.out.println();
+        funcImpr(cognoms,pos);
+    } else { System.out.println("La llista està buida!");
+  }
 
-    funcImpr(cognoms);
+
 
     System.out.println();
     break;
