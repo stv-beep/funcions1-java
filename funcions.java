@@ -57,21 +57,15 @@ public static boolean entradaLlista(String llista){
 * Funció: trobar a quina posició està l'element entrat per l'usuari
 */
 public static void funcLoc(String elem, String[] cognoms) {
-  /*Comptador d'elements*/
-  int num_elem =0;
-  for (String u : cognoms) {
-  if(u!=null) {
-      num_elem++;
-  }}
   Scanner sc = new Scanner(System.in);
   /*Preguntem l'element*/
   do {
       System.out.println("Introdueix un element: (Sense Comilles)");
       elem= sc.nextLine();
   } while(elem.length()<1);
-  for(int i = 0; i<num_elem; i++) {
+  for(int i = 0; i<cognoms.length; i++) {
 
-      if (i == num_elem) {
+      if (i == cognoms.length) {
           System.out.println("L'element "+elem+" no es troba a la llista cognoms"+".");
           break;
       }
@@ -131,9 +125,6 @@ for (int y=0 ; y<cognoms.length -1; y++) {
        } else {
            System.out.println("Aquesta posicio no es valida");
 
-
-
-
        }
        cognoms[cognoms.length-1] = "";
        for (int i = 0; i < cognoms.length; i++) {
@@ -151,19 +142,11 @@ for (int y=0 ; y<cognoms.length -1; y++) {
 /*Funció PrimerDarrer*/
 /*
 * Entrada: String[] dels cognoms
-* Sortida: l'element en la posició triada i imprimit per pantalla
+* Sortida: l'element en la posició triada (String) i imprimit per pantalla
 * Funció: mostrarà quin és el primer o últim element de la llista
 */
 public static String funcPD(String[] cognoms) {
   Scanner sc = new Scanner(System.in);
-  /*Comptador*/
-  int nE = 0;
-  if (llistaBuida(cognoms,nE)==false) {
-       for (String w : cognoms) {
-       if(w!=null) {
-           nE++;
-       }}}
-  /*Primer o darrer*/
   String pd;
   String primerDarrer = "";
   do {
@@ -174,10 +157,9 @@ public static String funcPD(String[] cognoms) {
       System.out.println(cognoms[0]);
       primerDarrer = cognoms[0];
   } else if (pd.equals("darrer")) {
-      System.out.println(cognoms[nE-1]);
-      primerDarrer = cognoms[nE-1];
+      System.out.println(cognoms[cognoms.length-1]);
+      primerDarrer = cognoms[cognoms.length-1];
   }
-
   return primerDarrer;
 }
 
@@ -260,12 +242,12 @@ public static void funcNull(String[] cognoms) {
   /**Variables*/
   /*array de les opcions del menú, que s'imprimiran per pantalla*/
   String[] opcions = {"\"i\": Inserir (element,posició,llista) --- NO OPERATIU",
-  "\"l\": Localitzar (element, llista)--- NO FUNCIONA BÉ",
-  "\"r\": Recuperar (posició, llista) --- OPERATIU",
+  "\"l\": Localitzar (element, llista)--- FALTA RETURN",
+  "\"r\": Recuperar (posició, llista) --- FALTA RETURN",
   "\"s\": Suprimir (posició)          --- OPERATIU",
   "\"d\": SuprimirDada (element)      --- NO OPERATIU",
   "\"a\": Anul·lar                    --- OPERATIU",
-  "\"p\": PrimerDarrer                --- NO OPERATIU",
+  "\"p\": PrimerDarrer                --- OPERATIU",
   "\"m\": Imprimir                    --- OPERATIU",
   "\"o\": Ordenar                     --- NO OPERATIU",
   "\"x\": Sortir                      --- OPERATIU"};
@@ -308,17 +290,19 @@ do{
           break;
 
     case 'a': //anul·lar
-
-    llistaBuida(cognoms, numEle);
-      if ((llistaBuida(cognoms, numEle)==false)) {
+      if (llistaBuida(cognoms, numEle)==false) {
     funcNull(cognoms);
       } else {
-        System.out.println("La llsita ja està buida!");
+        System.out.println("La llsita està buida!");
       }
     break;
 
     case 'p': //primerDarrer
+    if (llistaBuida(cognoms,numEle)==false) {
     funcPD(cognoms);
+      } else { System.out.println("La llista està buida!");}
+    System.out.println();
+
     break;
 
     case 'm': //imprimir
