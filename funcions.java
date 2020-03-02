@@ -35,7 +35,7 @@ public class funcions {
   		}
 
   		/**Funció per a demanar la posició
-      * @param  nE :int (número d'elements)
+      * @param nE :int (número d'elements)
       * @param llista : la llista dels cognoms
       * @return un int (la posició escrita per l'usuari)
       * Funció: l'usuari escriurà una posició i si és correcta es guardarà
@@ -89,8 +89,6 @@ public class funcions {
         }
 
         if(c==cgnm.length) { //la llista està plena
-          System.out.println(c);
-          System.out.println(cgnm.length);
             do {
                 System.out.println("La llista està plena, vols que borrem l'últim element \" "+cgnm[cgnm.length-1]+" \" o no efectuar la acció ( si / no ) ?");
                 siono = sc.nextLine();
@@ -106,8 +104,7 @@ public class funcions {
                 cgnm[p0] = x;
             }
         }else{
-          System.out.println(c + " stv");
-            System.out.println(cgnm.length + " stv");
+
             for (int e = c; e>p0; e--) {
                 cgnm[e] = cgnm[e-1];
             }
@@ -134,8 +131,6 @@ public class funcions {
   		public static int funcLoc(String elem, String[] cognoms2, int i) {
   				Scanner sc = new Scanner(System.in);
   				int loc = 0;
-  				/*Preguntem l'element*/
-  				elem = demEle(elem);
 
   				for (i = 0; i < cognoms2.length-1; i++) {//recorrem la llista
 
@@ -195,6 +190,63 @@ public class funcions {
   						return cogn;
   		}
 
+      /**Funció de Suprimir dada
+       * @param cokn : llista
+       * @param elm5 : (String) element que vols suprimir
+       * @param numE : número d'elemnts
+       * @return String[] : la llista. Imprimir la llista en la ultima posició lliure
+       * Funció: Suprimix un element de la llista
+       */
+      public static String[] funcSD(String[] cokn, String elm5, int numE) {
+
+        boolean marikon = false;
+        for (int i = 0; i<numE; i++) {
+          if  (marikon) {
+            i--;
+            marikon = false;
+          }
+          if(cokn[i] != null && cokn[i].equals(elm5)) {
+              System.out.println("L'alumne " + elm5 + " s'ha suprimit\n");
+              for (int z = i; z<numE-1;z++) {
+                cokn[z] = cokn[z+1];
+              }
+              cokn[numE-1] = null;
+              marikon = true;
+          } else if (marikon == false) { System.out.println("subser");
+        }
+        }
+
+
+
+
+          /*anterior*/
+
+
+
+                  /*  for (int i = 0; i < numE; i++) {
+                        if (elm5.equals(cokn[i])) {
+                          System.out.println("L'alumne " + elm5 + " s'ha suprimit\n");
+                            cokn[i] = "";
+
+                            for (int z = i; z <numE-1; z++) {
+                              cokn[z] = cokn[z+1];
+                            }
+                        cokn[numE - 1] = null;//borrem l'últim element ja que està copiat
+                      } else {System.out.println("MARIKON");}
+
+                      }
+
+*/
+        numE--;
+
+
+
+        funcImpr(cokn, numE);
+
+
+        return cokn;
+    }
+
   		/**Funció PrimerDarrer
   		 * @param cogs : la llista
        * @param q : (int) iterador del bucle
@@ -204,7 +256,6 @@ public class funcions {
   		public static String funcPD(String[] cogs, int q) {
   				Scanner sc = new Scanner(System.in);
   				String pd;
-          int compt = 0;
   				String primerDarrer = "";
   				do {
   						System.out.println("Opcions: \"primer\" o \"darrer\"");
@@ -216,7 +267,7 @@ public class funcions {
             return primerDarrer;
 
   				} else if (pd.equals("darrer")) {
-            for (q = cogs.length-1; q>=0;q--){
+            for (q = cogs.length-1; q>=0;q--){//comencem a llegir la llista des de darrera
               if (cogs[q]!=null) {
                   primerDarrer = cogs[q];
                   System.out.println(primerDarrer);
@@ -332,7 +383,7 @@ public class funcions {
   				 * Variables
   				 */
   				/*array de les opcions del menú, que s'imprimiran per pantalla*/
-  				String[] opcions = {"\"i\": Inserir          --- TÉ IMPERFECCIONS",
+  				String[] opcions = {"\"i\": Inserir          --- OPERATIU",
   						            "\"l\": Localitzar       --- TÉ IMPERFECCIONS",
   						            "\"r\": Recuperar        --- OPERATIU",
   						            "\"s\": Suprimir         --- OPERATIU",
@@ -366,7 +417,7 @@ public class funcions {
 
   						case 'l': //Localitzar
   								if (llistaBuida(cognoms, numEle) == false) {
-  										funcLoc(element, cognoms, n1);
+  										funcLoc(demEle(element), cognoms, n1);
   								} else {
   										System.out.println("La llista està buida!");
   								}
@@ -389,6 +440,14 @@ public class funcions {
   								}
                   numEle = cognoms.length-1;
   								break;
+
+              case 'd': //suprimir dada
+                    if (llistaBuida(cognoms, numEle) == false) {
+                        funcSD(cognoms, demEle(element), numEle);
+                    } else {
+                        System.out.println("La llsita està buida!");
+                    }
+                    break;
 
   						case 'a': //anul·lar
   								if (llistaBuida(cognoms, numEle) == false) {
