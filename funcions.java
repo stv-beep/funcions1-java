@@ -2,17 +2,22 @@ import java.util.Scanner;
 public class funcions {
 
   /**
-  		 * ***FUNCIONS***
-  		 */
-  		/**
-  		 * Pel que fa al codi, en concret hem de tenir una funció per presentar el
-  		 * menú: char menu(String[ ] opcions)
-  		 */
+  		 *<h1>GESTIÓ D'UNA LLISTA AMB FUNCIONS</h1>
+       *Un programa per a gestionar una llista formada
+       pels cognoms dels alumnes de la classe.
+       Totes les operacions es faran per mitjà de FUNCIONS
+       que hem implementat.
+       @author Aleix Algueró, Isaac Brull i Marc España
+       */
 
-  		/*
-  		 * Entrada: la llista de les opcions
-  		 * Sortida: un char, escrit per l'usuari
-  		 * Funció: Mostra opcions per pantalla, recull quina opció escull l'usuari q haurà
+       
+
+  		/**
+       * Funció per a mostrar les opcions i demanar-ne una
+   		 * @param opcions1 : la llista de les opcions
+  		 * @return opc : un char, escrit per l'usuari
+  		 * Funció: Mostra opcions per pantalla,
+       * recull quina opció escull l'usuari que haurà
   		   de ser de tipus char, torna aquest char
   		 */
   		public static char Menu(String[] opcions1) {
@@ -30,9 +35,10 @@ public class funcions {
   				return opc;
   		}
 
-  		/*Funció per a demanar la posició
-      * Entrada: un int (número d'elements) i la llista
-      * Sortida: un int (la posició escrita per l'usuari)
+  		/**Funció per a demanar la posició
+      * @param  numEle :int (número d'elements)
+      * @param llista : la llista dels cognoms
+      * @return un int (la posició escrita per l'usuari)
       * Funció: l'usuari escriurà una posició i si és correcta es guardarà
       "posició" i la funció la retornarà
       */
@@ -51,10 +57,9 @@ public class funcions {
   				return posicio;
       }
 
-      /*Funció per a demanar l'element*/
-  		/*
-  		 * Entrada: un String
-  		 * Sortida: el String escrit per l'usuari
+      /**Funció per a demanar l'element
+  		 * @param element : element que escriura el user
+  		 * @return element : el String escrit per l'usuari
   		 * Funció: demana un String a l'usuari
   		 */
   		public static String demEle(String element) {
@@ -67,10 +72,61 @@ public class funcions {
   				return element;
   		}
 
-  		/*Funció de localitzar element*/
-  		/*
-  		 * Entrada: un string que serà l'element a buscar, el String[] de la llista i un int
-  		 * Sortida: s'imprimirà per pantalla la posició de l'element (Void)
+      /**Funció d'INSERIR
+      * @param x : aquí es guarda l'"element" que ens retorna la funció anterior
+      * @param p0 : la posició
+      * @param cgnm : la llista
+      * @param c : int que utilitzem per als bucles
+      * @return String : la llista
+      * Funció: s'insereix l'element escrit per l'usuari i es borra l'últim
+      */
+      public static String funcIns(String x, int p0, String[] cgnm, int c) {
+        Scanner sc = new Scanner(System.in);
+        String xd = "";//el que retornarà la Funció
+        String siono;
+        for (c =0; c<cgnm.length;c++) {
+          if (cgnm[c]!=null) {
+            c++;
+          }
+        }
+
+        if(c==cgnm.length) {
+            do {
+                System.out.println("La llista esta plena, vols que borrem l'ultim element \" "+cgnm[cgnm.length-1]+" \" o no efectuar la acció ( si / no ) ?");
+                siono = sc.nextLine();
+            } while(!(siono.equals("si") || siono.equals("no")));
+
+            if (siono.equals("no")) {
+                System.out.println("OK");
+
+            }else{
+                for (int e = c-1; e>p0; e--) {
+                    cgnm[e] = cgnm[e-1];
+                }
+                cgnm[p0] = x;
+            }
+        }else{
+            for (int e = c; e>p0; e--) {
+                cgnm[e] = cgnm[e-1];
+            }
+            cgnm[p0] = x;
+        }
+
+        for(int e = 0; e<c-1; e++) {
+          System.out.println(cgnm[e]);
+          xd = cgnm[e];
+        }
+
+        return xd;
+      }
+
+
+  		/**Funció de localitzar element
+
+  		 * @param elem : un string que serà l'element a buscar
+       * @param cognoms2 : la llista
+       * @param i : un int amb el que recorrerem la llista
+  		 * @return int : la posició de l'element
   		 * Funció: trobar a quina posició està l'element entrat per l'usuari
   		 */
   		public static int funcLoc(String elem, String[] cognoms2, int i) {
@@ -79,28 +135,24 @@ public class funcions {
   				/*Preguntem l'element*/
   				elem = demEle(elem);
 
-  				for (i = 0; i < cognoms2.length-1; i++) {
-
+  				for (i = 0; i < cognoms2.length-1; i++) {//recorrem la llista
 
   						if (cognoms2[i] != null && cognoms2[i].equals(elem)) {
   								System.out.println("L'element " + elem + " es troba a la posició " + i + ".");
 
   						} else if (i >= cognoms2.length-1) {
   								System.out.println("L'element " + elem + " no es troba a la llista cognoms.");
-
   						}
-
-
   						loc = i;
   				}
   				return loc;
   		}
 
-  		/*Funció de recuperar element*/
-  		/*
-  		 * Entrada: un int que determinarà la posició a buscar, el String[] de la llista
-       i un int per a incrementar-se fins a la posició
-  		 * Sortida: retornarà l'element i a part, s'imprimirà per pantalla l'element que està a la posició p
+  		/**Funció de recuperar element
+  		 * @param p : un int que determinarà la posició a buscar
+       * @param coknoms : la llista
+       * @param n : int com a iterador del bucle per a incrementar-se fins a la posició
+  		 * @return String : retornarà l'element i a part, s'imprimirà per pantalla l'element que està a la posició p
   		 * Funció: trobar quin element de "coknoms" està a la posició p, incrementant la N fins a arribar a
        la posició.
   		 */
@@ -122,12 +174,14 @@ public class funcions {
   		}
 
 
-  		/*Funció de Suprimir*/
-  		/*Entrada: Escriure la posició de l'element que volem Suprimir
-  		 * Sortida: Imprimir la llista en la ultima posició lliure
+  		/**Funció de Suprimir
+       * @param cogn : llista
+       * @param p1 : (int) la posició
+       * @param numEle : número d'elemnts
+  		 * @return String[] : la llista. Imprimir la llista en la ultima posició lliure
   		 * Funció: Suprimix un element de la llista
   		 */
-  		public static int funcSupr(String[] cogn, int p1,int numEle) {
+  		public static String[] funcSupr(String[] cogn, int p1,int numEle) {
 
   						for (int y = p1; y < numEle-1; y++) {
   								cogn[y] = cogn[y + 1];
@@ -136,13 +190,13 @@ public class funcions {
   						numEle--;
   						System.out.println("L'element de la posició " + p1 + " ha estat eliminat");
   						funcImpr(cogn,numEle);
-  						return numEle;
+  						return cogn;
   		}
 
-  		/*Funció PrimerDarrer*/
-  		/*
-  		 * Entrada: String[] dels cognoms i int
-  		 * Sortida: l'element en la posició triada (String) i imprimit per pantalla
+  		/**Funció PrimerDarrer
+  		 * @param cogs : la llista
+       * @param q : (int)
+  		 * @return String . l'element en la posició triada (String) i imprimit per pantalla
   		 * Funció: mostrarà quin és el primer o últim element de la llista
   		 */
   		public static String funcPD(String[] cogs, int q) {
@@ -169,10 +223,10 @@ public class funcions {
   				return primerDarrer;
   		}
 
-  		/*Funció d'imprimir llista*/
-  		/*
-  		 * Entrada: String[] a imprimir, amb un int que indicara l'índex
-  		 * Sortida: Resultat per pantalla (Void), els elements amb les seves posicions
+  		/**Funció d'imprimir llista
+       * @param cognoms3 : la llista
+       * @param p3 : un int que indicara l'índex de la llista
+  		 * @return : Resultat per pantalla (Void), els elements amb les seves posicions
   		 * Funció: llegeix tota la llista i mostra tots els elements amb la seva posició
   		 */
   		public static void funcImpr(String[] cognoms3, int p3) {
@@ -187,15 +241,11 @@ public class funcions {
 
   		}
 
-  		/*Funció per a saber si la llista està buida o no*/
-  		/**
-  		 * boolean llistaBuida(String[ ] llista, int elements) que ens digui si la
-  		 * llista està buida o no. Aquesta funció s'utilitza com a funció auxiliar
-  		 * en moltes altres funcions.
-  		 */
-  		/*ENTRADA: llista i int (num_elements)
-  		 * SORTIDA: un booleà que ens dirà si la llista està buida (true) o no (false)
-  		 * FUNCIÓ: inidicarà si a la llista hi ha valors o no
+  		/**Funció per a saber si la llista està buida o no
+  		 * @param cognomsl : la llista
+       * @param num_elements  : (int) el comptador d'elements de la llista
+  		 * @return boolean : un booleà que ens dirà si la llista està buida (true) o no (false)
+  		 * FUNCIÓ: inidicarà si a la llista hi ha valors o no, comptant-los
   		 */
   		public static boolean llistaBuida(String[] cognomsl, int num_elements) {
   				/*comptador d'elements*/
@@ -214,36 +264,39 @@ public class funcions {
   				return buit;
   		}
 
-  		/*Funció ANULAR*/
-  		/* Entrada: String[] dels cognoms i int del número d'elements
-  		 * Sortida: la llista, i un missatge per pantalla dient que la llista ha estat buidada
+  		/**Funció ANULAR
+  		 * @param subnom : la llista dels cognoms
+       * @param nE : int del número d'elements
+  		 * @return String[] : la llista, i un missatge per pantalla dient que la llista ha estat buidada
   		 * Funció: es convertiran en null tots els elements de la llista
   		 */
-  		public static String[] funcNull(String[] cognoms, int num_elements) {
-  				num_elements = 0;
-  				for (String e : cognoms) {
+  		public static String[] funcNull(String[] subnom, int nE) {
+  				nE = 0;
+  				for (String e : subnom) {
   						if (e != null) {
-  								num_elements++;
+  								nE++;
   						}
   				}
 
-  				for (int i = 0; i < num_elements; i++) {
-  						cognoms[i] = null;
+  				for (int i = 0; i < nE; i++) {
+  						subnom[i] = null;
   				}
   				System.out.println("La llista (cognoms) ha estat buidada.");
-  				for (String e : cognoms) {
+  				for (String e : subnom) {
   						if (e != null) {
-  								num_elements++;
+  								nE++;
   								System.out.print(e);
   						}
   				}
-  				return cognoms;
+  				return subnom;
   		}
 
-  		/*Funció ORDENAR
-       * Entrada: la llista i un int per a recorrer la llista al imprimir
-  		 * Sortida: la llista d'elemetns ordenada alfabeticament
-  		 * Funció: s'ordenaran alfabeticament tots els element de la llista
+  		/**Funció ORDENAR
+       * @param cognLlis : la llista
+       * @param w : int per a recorrer la llista al imprimir
+  		 * @return String[] : la llista d'elements ordenada alfabeticament
+  		 * Funció: s'ordenaran alfabeticament tots els element de la llista,
+       * comparant-se entre ells.
   		 */
   		public static String[] funcOrde(String[] cognLlis, int w) {
 
@@ -303,8 +356,9 @@ public class funcions {
 
   						switch (opc1) {
   						case 'i': //inserir
-
-  								break;
+              //public static String funcIns(String x, int p0, String[] cgnm, int c)
+                  funcIns(demEle(element),demPos(numEle,cognoms),cognoms,n1);
+              break;
 
   						case 'l': //Localitzar
   								if (llistaBuida(cognoms, numEle) == false) {
