@@ -2,18 +2,17 @@ import java.util.Scanner;
 public class funcions {
 
   /**
-  		 *<h1>GESTIÓ D'UNA LLISTA AMB FUNCIONS</h1>
-       *Un programa per a gestionar una llista formada
+  		 <h1>GESTIÓ D'UNA LLISTA AMB FUNCIONS</h1>
+       Un programa per a gestionar una llista formada
        pels cognoms dels alumnes de la classe.
        Totes les operacions es faran per mitjà de FUNCIONS
        que hem implementat.
        @author Aleix Algueró, Isaac Brull i Marc España
        */
 
-       
 
-  		/**
-       * Funció per a mostrar les opcions i demanar-ne una
+
+  		/**Funció per a mostrar les opcions i demanar-ne una
    		 * @param opcions1 : la llista de les opcions
   		 * @return opc : un char, escrit per l'usuari
   		 * Funció: Mostra opcions per pantalla,
@@ -36,19 +35,19 @@ public class funcions {
   		}
 
   		/**Funció per a demanar la posició
-      * @param  numEle :int (número d'elements)
+      * @param  nE :int (número d'elements)
       * @param llista : la llista dels cognoms
       * @return un int (la posició escrita per l'usuari)
       * Funció: l'usuari escriurà una posició i si és correcta es guardarà
       "posició" i la funció la retornarà
       */
-      public static int demPos(int numEle, String[] llista) {
+      public static int demPos(int nE, String[] llista) {
           Scanner sc = new Scanner(System.in);
           System.out.println("Escriu una posició:");
   				int posicio;
           while (true) {
               posicio = sc.nextInt();
-              if (posicio >= 0 && posicio <= numEle && posicio < llista.length) {
+              if (posicio >= 0 && posicio <= nE && posicio < llista.length) {
                   break;
               } else {
                   System.out.println("Posició incorrecta. Torna a introduir:");
@@ -76,53 +75,56 @@ public class funcions {
       * @param x : aquí es guarda l'"element" que ens retorna la funció anterior
       * @param p0 : la posició
       * @param cgnm : la llista
-      * @param c : int que utilitzem per als bucles
-      * @return String : la llista
+      * @param c : int que utilitzem com a comptador
+      * @return String[] : la llista
       * Funció: s'insereix l'element escrit per l'usuari i es borra l'últim
       */
-      public static String funcIns(String x, int p0, String[] cgnm, int c) {
+      public static String[] funcIns(String x, int p0, String[] cgnm, int c) {
         Scanner sc = new Scanner(System.in);
-        String xd = "";//el que retornarà la Funció
-        String siono;
-        for (c =0; c<cgnm.length;c++) {
-          if (cgnm[c]!=null) {
+        String siono; //guardarà la resposta que escrigui l'usuari quan se li pregunte si vol borrar l'últim element
+        for (int t =0; t<cgnm.length;t++) {
+          if (cgnm[t]!=null) {
             c++;
           }
         }
 
-        if(c==cgnm.length) {
+        if(c==cgnm.length) { //la llista està plena
+          System.out.println(c);
+          System.out.println(cgnm.length);
             do {
-                System.out.println("La llista esta plena, vols que borrem l'ultim element \" "+cgnm[cgnm.length-1]+" \" o no efectuar la acció ( si / no ) ?");
+                System.out.println("La llista està plena, vols que borrem l'últim element \" "+cgnm[cgnm.length-1]+" \" o no efectuar la acció ( si / no ) ?");
                 siono = sc.nextLine();
             } while(!(siono.equals("si") || siono.equals("no")));
 
             if (siono.equals("no")) {
-                System.out.println("OK");
-
-            }else{
+                System.out.println("OK. Imprimint la llista...");
+                System.out.println();
+            }else{//sobrescrivim l'element d'aquella posició per l'entrat, i movem la resta
                 for (int e = c-1; e>p0; e--) {
                     cgnm[e] = cgnm[e-1];
                 }
                 cgnm[p0] = x;
             }
         }else{
+          System.out.println(c + " stv");
+            System.out.println(cgnm.length + " stv");
             for (int e = c; e>p0; e--) {
                 cgnm[e] = cgnm[e-1];
             }
             cgnm[p0] = x;
         }
 
-        for(int e = 0; e<c-1; e++) {
+        for(int e = 0; e<c; e++) {
+          if (cgnm[e]!=null) {
           System.out.println(cgnm[e]);
-          xd = cgnm[e];
+          }
         }
-
-        return xd;
+        System.out.println();
+        return cgnm;
       }
 
 
   		/**Funció de localitzar element
-
   		 * @param elem : un string que serà l'element a buscar
        * @param cognoms2 : la llista
        * @param i : un int amb el que recorrerem la llista
@@ -188,20 +190,21 @@ public class funcions {
   						}
   						cogn[numEle-1] = null;
   						numEle--;
-  						System.out.println("L'element de la posició " + p1 + " ha estat eliminat");
+  						System.out.println("L'element de la posició " + p1 + " ha estat eliminat. Desplaçant els elements següents...");
   						funcImpr(cogn,numEle);
   						return cogn;
   		}
 
   		/**Funció PrimerDarrer
   		 * @param cogs : la llista
-       * @param q : (int)
+       * @param q : (int) iterador del bucle
   		 * @return String . l'element en la posició triada (String) i imprimit per pantalla
   		 * Funció: mostrarà quin és el primer o últim element de la llista
   		 */
   		public static String funcPD(String[] cogs, int q) {
   				Scanner sc = new Scanner(System.in);
   				String pd;
+          int compt = 0;
   				String primerDarrer = "";
   				do {
   						System.out.println("Opcions: \"primer\" o \"darrer\"");
@@ -210,23 +213,26 @@ public class funcions {
   				if (pd.equals("primer")) {
   						System.out.println(cogs[0]);
   						primerDarrer = cogs[0];
-  				} else if (pd.equals("darrer")) {
-            for (q = 0; q<cogs.length-1;q++){
-              if (cogs[q]!=null) {
-                q++;
-              }
-              primerDarrer = cogs[q];
-            }
-  						System.out.println(primerDarrer);
+            return primerDarrer;
 
+  				} else if (pd.equals("darrer")) {
+            for (q = cogs.length-1; q>=0;q--){
+              if (cogs[q]!=null) {
+                  primerDarrer = cogs[q];
+                  System.out.println(primerDarrer);
+                  return primerDarrer;
+              }
+  						System.out.println(primerDarrer);
   				}
-  				return primerDarrer;
+
   		}
+      return primerDarrer;
+    }
 
   		/**Funció d'imprimir llista
        * @param cognoms3 : la llista
        * @param p3 : un int que indicara l'índex de la llista
-  		 * @return : Resultat per pantalla (Void), els elements amb les seves posicions
+  		 * No retorna res : Resultat per pantalla (Void), els elements amb les seves posicions
   		 * Funció: llegeix tota la llista i mostra tots els elements amb la seva posició
   		 */
   		public static void funcImpr(String[] cognoms3, int p3) {
@@ -326,7 +332,7 @@ public class funcions {
   				 * Variables
   				 */
   				/*array de les opcions del menú, que s'imprimiran per pantalla*/
-  				String[] opcions = {"\"i\": Inserir          --- NO OPERATIU",
+  				String[] opcions = {"\"i\": Inserir          --- TÉ IMPERFECCIONS",
   						            "\"l\": Localitzar       --- TÉ IMPERFECCIONS",
   						            "\"r\": Recuperar        --- OPERATIU",
   						            "\"s\": Suprimir         --- OPERATIU",
@@ -346,9 +352,7 @@ public class funcions {
   				int numEle = cognoms.length; //comptador d'elements
   				String nomllista;
   				String llista = ""; //nom de la llista
-  				int n1 = 0;
-  				//String primerDarrer;
-  				boolean comprovacioList;// on guardarem el boolea que ens retornarà la funcio llistaBuida
+  				int n1 = 0; //variable auxiliar
   				Scanner sc = new Scanner(System.in);
 
   				do {
@@ -379,9 +383,11 @@ public class funcions {
   						case 's'://suprimir
   								if (llistaBuida(cognoms, numEle) == false) {
   										funcSupr(cognoms, demPos(numEle,cognoms),numEle);
+
   								} else {
   										System.out.println("La llsita està buida!");
   								}
+                  numEle = cognoms.length-1;
   								break;
 
   						case 'a': //anul·lar
@@ -394,7 +400,7 @@ public class funcions {
 
   						case 'p': //primerDarrer
   								if (llistaBuida(cognoms, n1) == false) {
-  										funcPD(cognoms, numEle);
+  										funcPD(cognoms, n1);
   								} else {
   										System.out.println("La llista està buida!");
   								}
