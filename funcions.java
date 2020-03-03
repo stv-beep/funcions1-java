@@ -332,7 +332,7 @@ public class funcions {
   						            "\"o\": Ordenar",
   						            "\"x\": Sortir"};
 
-  				final int mida = 5;
+  				final int mida = 10;
   				String cognoms[] = new String[mida];
   				boolean running = true;//per al do { } while del switch
   				String x, element = " "; //element
