@@ -222,15 +222,11 @@ public class funcions {
             return primerDarrer;
 
   				} else if (pd.equals("darrer")) {
-            for (int i = q-1; i>=0;i--){//comencem a llegir la llista des de darrera
-              if (cogs[i]!=null) {
-                  primerDarrer = cogs[i];
+
+                  primerDarrer = cogs[q-1];
 
                   return primerDarrer;
-              }
-
-  				}
-
+          
   		}
       return primerDarrer;
     }
@@ -383,7 +379,7 @@ public class funcions {
   								if (llistaBuida(cognoms, numEle) == false) {
                     pos = demPos(numEle,cognoms);
   										numEle = funcSupr(cognoms, pos,numEle);
-                      //if (cognoms[pos] =)
+
                       System.out.println("L'element de la posició " + pos + " ha estat eliminat. Desplaçant els elements següents...");
                       funcImpr(cognoms,numEle);
   								} else {
