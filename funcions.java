@@ -95,20 +95,25 @@ public class funcions {
             if (siono.equals("no")) {
                 System.out.println("OK. Imprimint la llista...\n");
             }else{//sobrescrivim l'element d'aquella posició per l'entrat, i movem la resta cap a la dreta
-                for (int e = c+1; e>p0; e--) {
+                for (int e = c-1; e>p0; e--) {
                     cgnm[e] = cgnm[e-1];
+
                 }
                 cgnm[p0] = x;
-            }
+            c=10; //la llista està plena i per tant té 10 Elements
+          return c;
+        }
         }else{//si la llista no està plena
 
             for (int e = c; e>p0; e--) {
                 cgnm[e] = cgnm[e-1];
             }
             cgnm[p0] = x;
+            c++;
+
+            return c;
         }
 
-        c++;
         return c;
       }
 
@@ -327,7 +332,7 @@ public class funcions {
   						            "\"o\": Ordenar",
   						            "\"x\": Sortir"};
 
-  				final int mida = 10;
+  				final int mida = 5;
   				String cognoms[] = new String[mida];
   				boolean running = true;//per al do { } while del switch
   				String x, element = " "; //element
