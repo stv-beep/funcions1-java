@@ -109,7 +109,6 @@ public class funcions {
         }
 
         c++;
-        System.out.println(c);
         return c;
       }
 
@@ -162,7 +161,7 @@ public class funcions {
        * @param cogn : llista
        * @param p1 : (int) la posició
        * @param numEle : número d'elemnts
-  		 * @return String[] : la llista. Imprimir la llista en la ultima posició lliure
+  		 * @return int : número d'elements
   		 * Funció: Suprimix un element de la llista
   		 */
   		public static int funcSupr(String[] cogn, int p1,int numEle) {
@@ -181,7 +180,7 @@ public class funcions {
        * @param cokn : llista
        * @param elm5 : (String) element que vols suprimir
        * @param numE : número d'elemnts
-       * @return String[] : la llista. Imprimir la llista en la ultima posició lliure
+       * @return int : número d'elements
        * Funció: Suprimix un element de la llista
        */
        public static int funcSD(String[] cokn, String elm5, int numE) {
@@ -198,18 +197,14 @@ public class funcions {
              }
 
          }
-
          numE--;
-
-
-
          return numE;
      }
 
 
   		/**Funció PrimerDarrer
   		 * @param cogs : la llista
-       * @param q : (int) iterador del bucle
+       * @param q : (int) número d'elements
   		 * @return String . l'element en la posició triada (String) i imprimit per pantalla
   		 * Funció: mostrarà quin és el primer o últim element de la llista
   		 */
@@ -242,7 +237,7 @@ public class funcions {
 
   		/**Funció d'imprimir llista
        * @param cognoms3 : la llista
-       * @param compt : un int que indicara l'índex de la llista
+       * @param compt : número d'elements
   		 * No retorna res : Resultat per pantalla (Void), els elements amb les seves posicions
   		 * Funció: llegeix tota la llista i mostra tots els elements amb la seva posició
   		 */
@@ -290,14 +285,14 @@ public class funcions {
   				}
 
           nE = 0;
-          System.out.println(nE);
+
   				return nE;
   		}
 
   		/**Funció ORDENAR
        * @param cognLlis : la llista
        * @param w : int per a recorrer la llista al imprimir
-  		 * @return String[] : la llista d'elements ordenada alfabeticament
+  		 * @return String[] : la llista d'elements ordenada alfabèticament
   		 * Funció: s'ordenaran alfabeticament tots els element de la llista,
        * comparant-se entre ells.
   		 */
