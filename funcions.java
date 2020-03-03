@@ -13,7 +13,7 @@ public class funcions {
 
 
   		/**Funció per a mostrar les opcions i demanar-ne una
-   		 * @param opcions1 : la llista de les opcions
+   		 * @param opcions1 String[] : la llista de les opcions
   		 * @return opc : un char, escrit per l'usuari
   		 * Funció: Mostra opcions per pantalla,
        * recull quina opció escull l'usuari que haurà
@@ -172,7 +172,6 @@ public class funcions {
   						cogn[numEle-1] = null;
   						numEle--;
 
-
   						return numEle;
   		}
 
@@ -226,7 +225,7 @@ public class funcions {
                   primerDarrer = cogs[q-1];
 
                   return primerDarrer;
-          
+
   		}
       return primerDarrer;
     }
@@ -243,20 +242,20 @@ public class funcions {
             if (cognoms3[i]!=null) {
 
   						System.out.println("L'element " + i + " és " + cognoms3[i] + ".");
-  				}}
-  				/*No poso cap altra condició ja que tenim una funció per a comprovar
-  				   si la llista està buida o no*/
-
+  				}
+        }
+        /*No poso cap altra condició ja que tenim una funció per a comprovar
+           si la llista està buida o no*/
   		}
 
   		/**Funció per a saber si la llista està buida o no
   		 * @param cognomsl : la llista
        * @param num_elements  : (int) el comptador d'elements de la llista
   		 * @return boolean : un booleà que ens dirà si la llista està buida (true) o no (false)
-  		 * FUNCIÓ: inidicarà si a la llista hi ha valors o no, comptant-los
+  		 * FUNCIÓ: inidicarà si a la llista hi ha valors o comprovant si hi ha
+       com a mínim un element
   		 */
   		public static boolean llistaBuida(String[] cognomsl, int num_elements) {
-  				/*comptador d'elements*/
   				boolean buit;//indicarà si la llista està buida o no
 
   				if (num_elements < 1) { //la llista està buida
@@ -349,7 +348,7 @@ public class funcions {
                   numEle = funcIns(x,pos,cognoms,numEle);
                   System.out.println("Imprimint la llista...\n");
                   funcImpr(cognoms,numEle);
-              break;
+                  break;
 
   						case 'l': //Localitzar
   								if (llistaBuida(cognoms, numEle) == false) {
@@ -388,7 +387,7 @@ public class funcions {
 
   								break;
 
-                  case 'd': //suprimir dada
+              case 'd': //suprimir dada
                         if (llistaBuida(cognoms, numEle) == false) {
                             x = demEle();
                             numEle = funcSD(cognoms, x, numEle);
